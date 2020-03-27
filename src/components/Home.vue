@@ -147,7 +147,8 @@ export default {
 <style scoped>
 .home{
     min-height: 100vh;
-    background-color: #f5f5f5;
+    background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(205,205,205,1) 0%, rgba(206,246,255,1) 100%);
 }
 .head{
     padding:25px;
@@ -198,6 +199,10 @@ li{
     margin-top: 15px;
     margin-right: 15px;
     border-radius: 25%;
+}
+.list-group{
+    border-radius: 3%;
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15);
 }
 .scene{
     position: absolute;

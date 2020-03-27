@@ -76,7 +76,8 @@ export default {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+  background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(205,205,205,1) 0%, rgba(206,246,255,1) 100%);
   height: 100vh;
 }
 .form-signin {
@@ -84,6 +85,10 @@ export default {
   max-width: 330px;
   padding: 15px;
   margin: auto;
+  border-radius: 3%;
+  border: 1px solid;
+  border-color: rgba(60,64,67,.15);
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15);
 }
 .form-signin .checkbox {
   font-weight: 400;
