@@ -7,7 +7,7 @@
             <div class="todolist">
                 <ul class="list-group">
                     <li class="list-group-item" v-for="(item,index) in user.todos" :key=index>
-                        <span v-if="item.todo.length>25">{{item.todo.slice(0,25)}}...</span>
+                        <span v-if="item.todo.length>25">{{item.todo.slice(0,20)}}...</span>
                         <span v-else>{{item.todo}}</span>
                     <i @click="edittodo(index)" data-toggle="modal" data-target="#todomodal" class="fa fa-pencil"></i>
                     </li>
@@ -116,8 +116,7 @@ export default {
 <style scoped>
 .home{
     min-height: 100vh;
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(254,255,240,1) 0%, rgba(239,252,255,1) 100%);
+    background-color: #f5f5f5;
 }
 .head{
     padding:25px;
@@ -133,7 +132,7 @@ export default {
     display: block;
 }
 .todolist{
-    width: 50%;
+    width: 40%;
     margin: 0 auto;
     padding-bottom: 40px;
     overflow: hidden;
