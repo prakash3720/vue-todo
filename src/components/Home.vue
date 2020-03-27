@@ -3,11 +3,11 @@
         <button id="logout" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="left" title="Logout" @click="logout"><i class="fa fa-sign-out editsym"></i></button>
         <div class="container">
             <h2 class="head">ToDo</h2>
-            <p class="head2">Welcome <strong>{{user.name}}</strong>,<span>Let's see your ToDo's</span></p>
+            <p class="head2">Welcome <strong>{{user.name}}</strong>,<span>Your ToDo's List</span></p>
             <div class="todolist">
                 <ul class="list-group">
                     <li class="list-group-item" v-for="(item,index) in user.todos" :key=index>
-                        <span v-if="item.todo.length>25">{{item.todo.slice(0,20)}}...</span>
+                        <span v-if="item.todo.length>25">{{item.todo.slice(0,18)}}...</span>
                         <span v-else>{{item.todo}}</span>
                     <i @click="edittodo(index)" data-toggle="modal" data-target="#todomodal" class="fa fa-pencil"></i>
                     </li>
@@ -15,7 +15,7 @@
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" v-model="newtodo" v-on:keyup.enter="addItem">
                             <div class="input-group-append" @click="addItem">
-                                <span class="input-group-text"><i class="fa fa-plus"></i></span>
+                                <span class="input-group-text"><i id="plus" class="fa fa-plus"></i></span>
                             </div>
                         </div>
                     </li>
@@ -37,7 +37,7 @@
                         <div class="modal-footer">
                             <!-- <button type="button" class="btn btn-alert" data-dismiss="modal">Delete</button> -->
                             <button type="button" class="btn btn-danger" @click="deletetodo" data-dismiss="modal"><i class="fa fa-trash editsym"></i></button>
-                            <button type="button" class="btn btn-primary" @click="todoedit" data-dismiss="modal"><i class="fa fa-save editsym"></i></button>
+                            <button type="button" class="btn btn-primary" @click="todoedit" data-dismiss="modal"><i class="fa fa-check editsym"></i></button>
                         </div>
                     </div>
                 </div>
@@ -60,9 +60,15 @@ export default {
     methods:{
         addItem(){
             if(this.newtodo){
+                document.getElementById('plus').classList.remove("fa-plus")
+                document.getElementById('plus').classList.add("fa-spinner")
+                document.getElementById('plus').classList.add("fa-spin")
                 this.$store.dispatch('add',{todo:this.newtodo}).then(res=>{
                     this.user.todos=res
                     this.newtodo=''
+                    document.getElementById('plus').classList.add("fa-plus")
+                    document.getElementById('plus').classList.remove("fa-spinner")
+                    document.getElementById('plus').classList.remove("fa-spin")
                 })
                 .catch(err=>{
                     console.log(err)
@@ -77,20 +83,32 @@ export default {
             this.todoed=this.user.todos[index].todo
         },
         deletetodo(){
+            document.getElementById('plus').classList.remove("fa-plus")
+            document.getElementById('plus').classList.add("fa-spinner")
+            document.getElementById('plus').classList.add("fa-spin")
             this.$store.dispatch('delete',{index:this.user.todos[this.index].id}).then((res)=>{
                 this.user.todos=res
                 this.index=0
-                this.todoed=''    
+                this.todoed=''
+                document.getElementById('plus').classList.add("fa-plus")
+                document.getElementById('plus').classList.remove("fa-spinner")
+                document.getElementById('plus').classList.remove("fa-spin")    
             })
             .catch(err=>{
                 console.log(err)
             })
         },
         todoedit(){
+            document.getElementById('plus').classList.remove("fa-plus")
+            document.getElementById('plus').classList.add("fa-spinner")
+            document.getElementById('plus').classList.add("fa-spin")
             this.$store.dispatch('edit',{index:this.user.todos[this.index].id,todo:this.todoed}).then((res)=>{
                 this.user.todos=res
                 this.index=0
-                this.todoed=''    
+                this.todoed=''
+                document.getElementById('plus').classList.add("fa-plus")
+                document.getElementById('plus').classList.remove("fa-spinner")
+                document.getElementById('plus').classList.remove("fa-spin")    
             })
             .catch(err=>{
                 console.log(err)
@@ -110,6 +128,9 @@ export default {
             this.user=res
         })
     },
+    created(){
+        window.scrollTo(0,0)
+    }
 }
 </script>
 
@@ -125,14 +146,14 @@ export default {
 }
 .head2{
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.45rem;
     margin-bottom: 40px;
 }
 .head2 span{
     display: block;
 }
 .todolist{
-    width: 40%;
+    width: 35%;
     margin: 0 auto;
     padding-bottom: 40px;
     overflow: hidden;
@@ -141,8 +162,8 @@ export default {
     margin: 0!important;
 }
 .fa{
-    color: rgb(76, 182, 129);
-    font-size: 1.3rem;
+    color: rgb(59, 160, 219);
+    font-size: 1.4rem;
 }
 li{
     font-size: 1.18rem;

@@ -9,7 +9,10 @@
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="password">
       <p v-if="feedback">{{feedback}}</p>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <div id="load" style="text-align:center;">
+        <PulseLoader/>
+      </div>
+      <button id="load2" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       <p class="nope">
         <router-link to="/register">Dont't have an account?</router-link>
       </p>
@@ -18,8 +21,12 @@
 </template>
 
 <script>
+import PulseLoader from 'vue-spinner/src/BeatLoader.vue'
 export default {
   name: 'Login',
+  components:{
+    PulseLoader
+  },
   data () {
     return {
       username:'',
@@ -29,11 +36,14 @@ export default {
   },
   methods:{
     login(){
+      document.getElementById('load').style.display="block"
+      document.getElementById('load2').style.display="none"
       this.feedback=''
       let data={}
       data.username=this.username
       data.password=this.password
       this.$store.dispatch('login',data).then((res)=>{
+        document.getElementById('load').style.display="none"
         if(res.status){
           this.$router.push({name:'Home'})
         }else{
@@ -41,9 +51,14 @@ export default {
         }
       })
       .catch(err=>{
+        document.getElementById('load').style.display="none"
+        document.getElementById('load2').style.display="block"
         this.feedback='The Username/Password is Wrong.'
       })
     }
+  },
+  mounted(){
+    document.getElementById('load').style.display="none"
   }
 }
 </script>

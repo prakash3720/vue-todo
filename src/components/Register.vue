@@ -11,7 +11,10 @@
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="password" autocomplete="off">
       <p v-if="feedback">{{feedback}}</p>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      <div id="load3" style="text-align:center;">
+        <PulseLoader/>
+      </div>
+      <button id="load4" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
       <p class="nope">
         <router-link to="/login">Already have an account?</router-link>
       </p>
@@ -20,8 +23,12 @@
 </template>
 
 <script>
+import PulseLoader from 'vue-spinner/src/BeatLoader.vue'
 export default {
   name: 'Register',
+  components:{
+    PulseLoader
+  },
   data () {
     return {
         name:'',
@@ -32,12 +39,15 @@ export default {
   },
   methods:{
     register(){
+      document.getElementById('load3').style.display="block"
+      document.getElementById('load4').style.display="none"
       this.feedback=''
       let data={}
       data.username=this.username
       data.name=this.name
       data.password=this.password
       this.$store.dispatch('register',data).then((res)=>{
+        document.getElementById('load3').style.display="none"
         if(res.status){
           window.alert("Please log in to continue.")
           this.$router.push({name:'Login'})
@@ -46,9 +56,14 @@ export default {
         }
       })
       .catch(err=>{
+        document.getElementById('load3').style.display="none"
+        document.getElementById('load4').style.display="block"
         this.feedback='Username already Exists.'
       })
     }
+  },
+  mounted(){
+    document.getElementById('load3').style.display="none"
   }
 }
 </script>
