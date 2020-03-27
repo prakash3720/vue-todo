@@ -14,7 +14,7 @@
       </div>
       <button id="load2" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       <p class="nope">
-        <router-link to="/register">Dont't have an account?</router-link>
+        <router-link to="/register">Don't have an account?</router-link>
       </p>
     </form>
   </div>

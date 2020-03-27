@@ -1,5 +1,10 @@
 <template>
     <div class="home" v-if="user">
+        <div class="scene">
+            <div class="inner">
+                <PulseLoader />
+            </div>
+        </div>
         <button id="logout" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="left" title="Logout" @click="logout"><i class="fa fa-sign-out editsym"></i></button>
         <div class="container">
             <h2 class="head">ToDo</h2>
@@ -47,8 +52,12 @@
 </template>
 
 <script>
+import PulseLoader from 'vue-spinner/src/BeatLoader.vue'
 export default {
     name:'Home',
+    components:{
+        PulseLoader
+    },
     data(){
         return{
             user:{},
@@ -76,6 +85,7 @@ export default {
             }
         },
         realTodos(){
+            document.querySelector('.scene').style.display="none"
             this.user.todos=this.user.todos
         },
         edittodo(index){
@@ -188,6 +198,18 @@ li{
     margin-top: 15px;
     margin-right: 15px;
     border-radius: 25%;
+}
+.scene{
+    position: absolute;
+    height: 100vh;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .editsym{
     color: #fff!important;
