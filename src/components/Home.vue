@@ -147,8 +147,7 @@ export default {
 <style scoped>
 .home{
     min-height: 100vh;
-    background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(205,205,205,1) 0%, rgba(206,246,255,1) 100%);
+    background: #f5f5f5;
 }
 .head{
     padding:25px;

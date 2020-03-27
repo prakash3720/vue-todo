@@ -71,8 +71,7 @@ export default {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(205,205,205,1) 0%, rgba(206,246,255,1) 100%);
+  background: #f5f5f5;
   height: 100vh;
 }
 .form-signin {
