@@ -5,17 +5,12 @@
                 <PulseLoader />
             </div>
         </div>
-        <button id="logout" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="left" title="Logout" @click="logout"><i class="fa fa-sign-out editsym"></i></button>
+        <button id="logout" class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="left" title="Logout" @click="logout">Logout</button>
         <div class="container">
             <h2 class="head">ToDo</h2>
             <p class="head2">Welcome <strong>{{user.name}}</strong>,<span>Your ToDo's List</span></p>
             <div class="todolist">
                 <ul class="list-group">
-                    <li class="list-group-item" v-for="(item,index) in user.todos" :key=index>
-                        <span v-if="item.todo.length>25">{{item.todo.slice(0,18)}}...</span>
-                        <span v-else>{{item.todo}}</span>
-                    <i @click="edittodo(index)" data-toggle="modal" data-target="#todomodal" class="fa fa-pencil"></i>
-                    </li>
                     <li class="add list-group-item">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" v-model="newtodo" v-on:keyup.enter="addItem">
@@ -23,6 +18,12 @@
                                 <span class="input-group-text"><i id="plus" class="fa fa-plus"></i></span>
                             </div>
                         </div>
+                    </li>
+                    <li class="list-group-item" v-for="(item,index) in user.todos" :key=index>
+                        <span v-if="item.todo.length>25">{{item.todo.slice(0,18)}}...</span>
+                        <span v-else>{{item.todo}}</span>
+                    <i @click="edittodo(index)" data-toggle="modal" data-target="#todomodal" class="fa fa-pencil"></i>
+                    <i id="trash" @click="delmenu(index)" class="fa fa-trash"></i>
                     </li>
                 </ul>
             </div>
@@ -98,6 +99,23 @@ export default {
             document.getElementById('plus').classList.add("fa-spin")
             this.$store.dispatch('delete',{index:this.user.todos[this.index].id}).then((res)=>{
                 this.user.todos=res
+                this.index=0
+                this.todoed=''
+                document.getElementById('plus').classList.add("fa-plus")
+                document.getElementById('plus').classList.remove("fa-spinner")
+                document.getElementById('plus').classList.remove("fa-spin")    
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        },
+        delmenu(val){
+            document.getElementById('plus').classList.remove("fa-plus")
+            document.getElementById('plus').classList.add("fa-spinner")
+            document.getElementById('plus').classList.add("fa-spin")
+            this.$store.dispatch('delete',{index:this.user.todos[val].id}).then((res)=>{
+                this.user.todos=res;
+                this.$forceUpdate();
                 this.index=0
                 this.todoed=''
                 document.getElementById('plus').classList.add("fa-plus")
@@ -186,7 +204,12 @@ li{
 }
 .fa-pencil{
     position: absolute;
-    right: 20px;
+    right: 58px;
+    cursor: pointer;
+}
+#trash{
+    position: absolute;
+    right: 17px;
     cursor: pointer;
 }
 .modal-body input{
@@ -197,7 +220,6 @@ li{
     right: 0;
     margin-top: 15px;
     margin-right: 15px;
-    border-radius: 25%;
 }
 .list-group{
     border-radius: 3%;
