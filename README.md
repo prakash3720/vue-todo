@@ -1,21 +1,24 @@
-# client
+## ToDo App
 
-> A Vue.js project
+This app is created using **Django(REST API)** and **Vue.js(FrontEnd Framework)**.
 
-## Build Setup
+The User can create an account and once the user logs in, he/she will be given the options to add, edit, view and delete the tasks in his/her ToDo list.
 
-``` bash
-# install dependencies
-npm install
+This ToDo App is live. Check it out [here](https://todo-djangovue.herokuapp.com/)
 
-# serve with hot reload at localhost:8080
-npm run dev
+---
 
-# build for production with minification
-npm run build
+## Screenshots
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## SignUp
+
+![Signup](https://bitbucket.org/prakash3720/todo-app/raw/9e8f3b56d345889d692842837a0487b32248388f/screenshots/1.PNG)
+
+## Login
+
+![Login](https://bitbucket.org/prakash3720/todo-app/raw/a52f2a3b4732100d6e5b3a12f6439a58dbf8a8ba/screenshots/2.PNG)
+
+## HomePage
+
+![Home](https://bitbucket.org/prakash3720/todo-app/raw/a52f2a3b4732100d6e5b3a12f6439a58dbf8a8ba/screenshots/3.PNG)
